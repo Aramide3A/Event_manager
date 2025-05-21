@@ -8,7 +8,7 @@ console.log("Registering Google strategy");
 passport.use(new GoogleStrategy({
   clientID: process.env.Google_ClientID,
   clientSecret: process.env.Google_ClientSecret,
-  callbackURL: "http://localhost:3000/auth/google/callback"
+  callbackURL: process.env.GOOGLE_CALLBACK_URL
 }, async (accessToken, refreshToken, profile, done) => {
   try {
     let user = await prisma.user.findFirst({ where: { providerId: profile.id } });

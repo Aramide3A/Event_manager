@@ -5,7 +5,9 @@ const eventRouter = require('./src/routes/register.routes')
 require('dotenv').config()
 require('./src/utils/passportGoogle')
 require('./src/utils/passportJwt')
+const cors = require('cors');
 
+app.use(cors());
 const app = express()
 app.use(passport.initialize())
 app.use(express.json())
