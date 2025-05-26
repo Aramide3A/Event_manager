@@ -16,7 +16,6 @@ model User {
   providerId String?
   createdAt  DateTime        @default(now())
   event      Event[]
-  ticketType Ticket_Type[]
   attendee   Ticket_Holder[]
 
   @@index([provider, providerId])
@@ -63,13 +62,13 @@ enum EVENT_STATUS {
 
 model Ticket_Type {
   id           Int             @id @default(autoincrement())
-  user         User            @relation(fields: [userId], references: [id])
-  userId       Int
+  name        String
+  amount       Int
+  description  String?
   event        Event           @relation(fields: [eventId], references: [id])
   eventId      Int
   ticketHolder Ticket_Holder[]
 
-  @@unique([userId, eventId])
 }
 
 model Ticket_Holder {
