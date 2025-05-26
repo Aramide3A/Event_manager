@@ -1,3 +1,4 @@
+const { connect } = require("../../routes/event.routes");
 const prisma = require("../../utils/prisma");
 const createTicketSchema = require("./schema/createTicket.schema");
 
@@ -8,12 +9,23 @@ const createTicket = async (req, res) => {
 
         const validatedInput = await createTicketSchema.validateAsync({ name, amount, description, eventId });
 
-        const ticket = await prisma.ticket.create({
-            data: validatedInput
+        const ticket = await prisma.ticket_Type.create({
+            data: {
+                name: validatedInput.name,
+                amount: validatedInput.amount,
+                available: validatedInput.amount,
+                description: validatedInput.description,
+                event: {
+                    connect: {
+                        id: parseInt(validatedInput.eventId),
+                    },
+                },
+            },
         });
 
+
         await prisma.event.update({
-            where: { id: eventId },
+            where: { id: parseInt(validatedInput.eventId) },
             data: {
                 totalTickets: {
                     increment: amount
@@ -28,5 +40,6 @@ const createTicket = async (req, res) => {
     }
 }
 
-module.exports =
-    createTicket;
+module.exports = {
+    createTicket,
+};

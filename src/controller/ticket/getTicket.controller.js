@@ -7,10 +7,15 @@ const getTicket = async (req, res) => {
             return res.status(400).json({ error: 'Invalid ticket ID' });
         }
 
-        const ticket = await prisma.ticket.findUnique({
+        const ticket = await prisma.ticket_Type.findUnique({
             where: { id: ticketId },
             include: {
                 event: true,
+                ticketHolder: {
+                    include: {
+                        user: true,
+                    },
+                },
             },
         });
 
@@ -25,6 +30,6 @@ const getTicket = async (req, res) => {
     }
 }
 
-module.exports = 
-    getTicket
-;
+module.exports = {
+    getTicket,
+};

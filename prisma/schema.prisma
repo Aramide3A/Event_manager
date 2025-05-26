@@ -62,24 +62,24 @@ enum EVENT_STATUS {
 
 model Ticket_Type {
   id           Int             @id @default(autoincrement())
-  name        String
+  name         String
   amount       Int
+  available    Int?
+  status       STATUS          @default(AVAILABLE)
   description  String?
   event        Event           @relation(fields: [eventId], references: [id])
   eventId      Int
   ticketHolder Ticket_Holder[]
-
 }
 
 model Ticket_Holder {
-  id           Int         @id @default(autoincrement())
-  user         User        @relation(fields: [userId], references: [id])
-  userId       Int
-  event        Event       @relation(fields: [eventId], references: [id])
-  eventId      Int
-  createdAt    DateTime    @default(now())
-  ticketType   Ticket_Type @relation(fields: [ticketTypeId], references: [id])
-  ticketTypeId Int
+  id         Int           @id @default(autoincrement())
+  user       User          @relation(fields: [userId], references: [id])
+  userId     Int
+  event      Event         @relation(fields: [eventId], references: [id])
+  eventId    Int
+  createdAt  DateTime      @default(now())
+  ticketType Ticket_Type[]
 
   @@unique([userId, eventId])
 }

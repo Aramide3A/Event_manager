@@ -4,6 +4,7 @@ const { getAllEvents } = require('../controller/event/getAllEvent.controller')
 const { getEventById } = require('../controller/event/getEvent.controller')
 const { createEvent } = require('../controller/event/postevent.controller')
 const { updateEvent } = require('../controller/event/putEvent.controller')
+const { registerForEvent } = require('../controller/event/registerEvent.controller')
 const { createTicket } = require('../controller/ticket/createTicket.controller')
 const { deleteTicket } = require('../controller/ticket/deleteTicket.controller')
 const { getAllTicket } = require('../controller/ticket/getAllTicket.controller')
@@ -22,6 +23,8 @@ router.post('/:id/ticket', authenticateToken, createTicket)
 router.get('/ticket/:ticketId', authenticateToken, getTicket)
 router.get('/:id/ticket', authenticateToken, getAllTicket)
 router.delete('/ticket/:ticketId', authenticateToken, deleteTicket)
+
+router.post('/:eventId/ticket/:ticketId/register', authenticateToken, registerForEvent)
 
 
 
