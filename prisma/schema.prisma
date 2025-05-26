@@ -8,35 +8,37 @@ datasource db {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  fullName String?
-  email    String   @unique
-  password String?
-  provider String?
+  id         Int             @id @default(autoincrement())
+  fullName   String?
+  email      String          @unique
+  password   String?
+  provider   String?
   providerId String?
-  createdAt DateTime @default(now())
-  event    Event[]
-  tickets  Ticket[]
+  createdAt  DateTime        @default(now())
+  event      Event[]
+  ticketType Ticket_Type[]
+  attendee   Ticket_Holder[]
 
   @@index([provider, providerId])
 }
 
 model Event {
-  id            Int          @id @default(autoincrement())
-  organiser     User         @relation(fields: [organiserId], references: [id])
-  organiserId   Int
-  name          String
-  description   String
-  location      String
-  date          DateTime
-  duration      String
-  tickets       Int
-  registered    Int          @default(0)
-  ticketStatus  STATUS       @default(AVAILABLE)
-  eventStatus   EVENT_STATUS @default(UPCOMING)
-  price         Decimal
-  qrCode        String
-  ticketHolders Ticket[]
+  id           Int             @id @default(autoincrement())
+  organiser    User            @relation(fields: [organiserId], references: [id])
+  organiserId  Int
+  name         String
+  description  String
+  location     String
+  date         DateTime
+  duration     String
+  totalTickets Int             @default(0)
+  registered   Int             @default(0)
+  eventType    EVENT_TYPE      @default(PHYSICAL)
+  ticketStatus STATUS          @default(AVAILABLE)
+  eventStatus  EVENT_STATUS    @default(UPCOMING)
+  qrCode       String?
+  ticketType   Ticket_Type[]
+  attendee     Ticket_Holder[]
 
   @@index([ticketStatus])
   @@index([eventStatus])
@@ -47,18 +49,38 @@ enum STATUS {
   SOLD_OUT
 }
 
+enum EVENT_TYPE {
+  PHYSICAL
+  VIRTUAL
+  HYBRID
+}
+
 enum EVENT_STATUS {
   UPCOMING
   ACTIVE
   DONE
 }
 
-model Ticket {
-  id      Int   @id @default(autoincrement())
-  user    User  @relation(fields: [userId], references: [id])
-  userId  Int
-  event   Event @relation(fields: [eventId], references: [id])
-  eventId Int
+model Ticket_Type {
+  id           Int             @id @default(autoincrement())
+  user         User            @relation(fields: [userId], references: [id])
+  userId       Int
+  event        Event           @relation(fields: [eventId], references: [id])
+  eventId      Int
+  ticketHolder Ticket_Holder[]
+
+  @@unique([userId, eventId])
+}
+
+model Ticket_Holder {
+  id           Int         @id @default(autoincrement())
+  user         User        @relation(fields: [userId], references: [id])
+  userId       Int
+  event        Event       @relation(fields: [eventId], references: [id])
+  eventId      Int
+  createdAt    DateTime    @default(now())
+  ticketType   Ticket_Type @relation(fields: [ticketTypeId], references: [id])
+  ticketTypeId Int
 
   @@unique([userId, eventId])
 }
