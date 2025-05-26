@@ -23,6 +23,6 @@ const deleteTicket = async (req, res) => {
     }
 }
 
-module.exports = {
-    deleteTicket,
-};
+module.exports =
+    deleteTicket
+    ;

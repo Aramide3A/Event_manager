@@ -36,6 +36,6 @@ const getAllEvents = async (req, res) => {
     }
 };
 
-module.exports = {
+module.exports = 
     getAllEvents
-};
+;

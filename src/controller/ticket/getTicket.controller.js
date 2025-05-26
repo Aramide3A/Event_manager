@@ -25,6 +25,6 @@ const getTicket = async (req, res) => {
     }
 }
 
-module.exports = {
-    getTicket,
-};
+module.exports = 
+    getTicket
+;

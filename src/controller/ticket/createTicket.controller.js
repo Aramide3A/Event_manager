@@ -3,10 +3,10 @@ const createTicketSchema = require("./schema/createTicket.schema");
 
 const createTicket = async (req, res) => {
     try {
-        const  eventId  = req.params.id;
+        const eventId = req.params.id;
         const { name, amount, description } = req.body;
 
-        const validatedInput = await createTicketSchema.validateAsync({name, amount, description, eventId});
+        const validatedInput = await createTicketSchema.validateAsync({ name, amount, description, eventId });
 
         const ticket = await prisma.ticket.create({
             data: validatedInput
@@ -28,6 +28,5 @@ const createTicket = async (req, res) => {
     }
 }
 
-module.exports = {
-    createTicket,
-};
+module.exports =
+    createTicket;

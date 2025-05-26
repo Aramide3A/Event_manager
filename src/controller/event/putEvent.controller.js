@@ -3,7 +3,7 @@ const updateEventSchema = require('./schema/updateEvent.schema.js');
 
 const updateEvent = async (req, res) => {
     try {
-        const  eventId  = req.params.id;
+        const eventId = req.params.id;
         const userId = req.user?.sub;
 
         if (!userId) {
@@ -32,6 +32,6 @@ const updateEvent = async (req, res) => {
     }
 }
 
-module.exports = {
+module.exports =
     updateEvent
-};
+    ;
