@@ -77,8 +77,8 @@ const registerForEvent = async (req, res) => {
         const updatedEvent = await prisma.event.update({
             where: { id: eventId },
             data: {
-                totalTickets: {
-                    decrement: 1,
+                registered: {
+                    increment: 1,
                 },
             },
         });
