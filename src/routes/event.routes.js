@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const authenticateToken = require('../middleware/auth')
-const {getAllEvents} = require('../controller/event/getAllEvent.controller')
+const {getAllEvents} = require('../controller/event/getallevent.controller')
 const {getEventById} = require('../controller/event/getevent.controller')
 const {createEvent} = require('../controller/event/postevent.controller')
 const {updateEvent} = require('../controller/event/putevent.controller')
