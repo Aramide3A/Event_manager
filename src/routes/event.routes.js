@@ -4,25 +4,25 @@ const authenticateToken = require("../middleware/auth.js");
 const {
   getAllEvents,
 } = require("../controller/event/getAllEvent.controller.js");
-const { getEventById } = require("../controller/event/getevent.controller.js");
-const { createEvent } = require("../controller/event/postevent.controller.js");
-const { updateEvent } = require("../controller/event/putevent.controller.js");
+const { getEventById } = require("../controller/event/getEvent.controller.js");
+const { createEvent } = require("../controller/event/postEvent.controller.js");
+const { updateEvent } = require("../controller/event/putEvent.controller.js");
 const {
   deleteEvent,
-} = require("../controller/event/deleteevent.controller.js");
+} = require("../controller/event/deletEevent.controller.js");
 const { createTicket } = require(
   `../controller/ticket/createTicket.controller.js`,
 );
-const { getTicket } = require("../controller/ticket/getticket.controller.js");
+const { getTicket } = require("../controller/ticket/getTicket.controller.js");
 const {
   getAllTicket,
-} = require("../controller/ticket/getallticket.controller.js");
+} = require("../controller/ticket/getAllTicket.controller.js");
 const {
   deleteTicket,
-} = require("../controller/ticket/deleteticket.controller.js");
+} = require("../controller/ticket/deleteTicket.controller.js");
 const {
   registerForEvent,
-} = require("../controller/event/registerevent.controller.js");
+} = require("../controller/event/registerEvent.controller.js");
 
 router.get("", authenticateToken, getAllEvents);
 router.get("/:id", authenticateToken, getEventById);
