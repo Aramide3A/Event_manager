@@ -35,11 +35,10 @@ router.post("/:id/ticket", authenticateToken, createTicket);
 router.get("/ticket/:ticketId", authenticateToken, getTicket);
 router.get("/:id/ticket", authenticateToken, getAllTicket);
 router.delete("/ticket/:ticketId", authenticateToken, deleteTicket);
-
 router.post(
   "/:eventId/ticket/:ticketId/register",
   authenticateToken,
   registerForEvent,
 );
-
+//new
 module.exports = router;
