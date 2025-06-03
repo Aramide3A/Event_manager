@@ -9,7 +9,7 @@ const { createEvent } = require("../controller/event/postEvent.controller.js");
 const { updateEvent } = require("../controller/event/putEvent.controller.js");
 const {
   deleteEvent,
-} = require("../controller/event/deletEevent.controller.js");
+} = require("../controller/event/deleteEvent.controller.js");
 const { createTicket } = require(
   `../controller/ticket/createTicket.controller.js`,
 );
